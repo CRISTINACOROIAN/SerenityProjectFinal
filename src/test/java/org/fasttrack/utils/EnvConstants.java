@@ -10,9 +10,6 @@ public class EnvConstants {
     public static final String WRONG_USER_EMAIL = "asd@asd.asd";
     public static final String ERROR_MESSAGE = "ERROR";
     public static final String PRODUCT_NAME = "belt";
-    public static final String USER_ADMIN = "admin";
-    public static final String USER_PASS_ADMIN = "parola11";
     public static final String LOGIN_ERROR_MESSAGE = "Error:";
-    public static final String OTHER_PRODUCT_NAME = "beanie";
 
 }
