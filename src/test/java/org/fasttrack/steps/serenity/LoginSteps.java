@@ -1,10 +1,8 @@
 package org.fasttrack.steps.serenity;
 
 import net.thucydides.core.annotations.Step;
-import org.fasttrack.steps.serenity.BaseSteps;
 
 public class LoginSteps extends BaseSteps {
-
 
     @Step
     public void setEmailField(String mail){
@@ -23,7 +21,7 @@ public class LoginSteps extends BaseSteps {
 
     @Step
     public void checkUserIsLoggedIn(String userName){
-        myAccountPage.checkUserLoggedIn(userName);
+        loginPage.checkUserLoggedIn(userName);
     }
 
     @Step
@@ -31,13 +29,10 @@ public class LoginSteps extends BaseSteps {
         loginPage.appearLoginErrorMessage(error);
     }
 
-
-
     @Step
     public void doLogin(String userEmail, String userPass) {
         navigateToLoginPage();
-        setEmailField(userEmail);
-        setPasswordField(userPass);
+        enterCredentials(userEmail, userPass);
         clickOnLoginButton();
     }
 

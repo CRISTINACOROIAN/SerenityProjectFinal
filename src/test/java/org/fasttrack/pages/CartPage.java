@@ -3,74 +3,53 @@ package org.fasttrack.pages;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-import java.util.List;
-
 public class CartPage extends BasePage {
 
-
-    @FindBy(css = ".product-cart-total .price")
-    private  List<WebElementFacade> listOfSubtotalPrices;
-
-    @FindBy(css = "[title='Subtotal']")
-    private  WebElementFacade subtotalText;
-
-    @FindBy(css = "[title='Shipping']")
-    private  WebElementFacade shippingFeeText;
-
-    @FindBy(css = "[title='Total']")
-    private  WebElementFacade grandTotal;
-
-    @FindBy(css=".cart-empty")
+    @FindBy(css=".product-remove .remove")
     private WebElementFacade clearCart;
 
     @FindBy(css=".checkout-button.button.alt.wc-forward")
     private WebElementFacade proceedToCheckoutButton;
 
-    @FindBy(css=".button.wc-forward")
-    private WebElementFacade viewCartButton;
+    @FindBy(css = ".single_add_to_cart_button.button.alt")
+    private WebElementFacade addToCartButton;
 
-    @FindBy(name="update_cart")
-    private WebElementFacade updateCartButton;
+    @FindBy(css= ".woocommerce .cart-empty")
+    private WebElementFacade emptyCart;
+
+    @FindBy(css=".entry-title")
+    private WebElementFacade checkoutPage;
+
+    @FindBy(css=".woocommerce-message .button.wc-forward")
+    private WebElementFacade viewCart;
 
 
-    public int getSubtotalPricesCalculated() {
-        int sum = 0;
-        for (WebElementFacade element : listOfSubtotalPrices) {
-            sum += getIntFromPrice(element.getText());
-        }
-        return sum;
+    public void clickAddToCartButton(){
+        clickOn(addToCartButton);
     }
-
-    public boolean isSubtotalPriceCorrect() {
-        return getSubtotalPricesCalculated() == getIntFromPrice(subtotalText.getText());
-    }
-
-    public int getSubtotalPriceWithTaxes(){
-        String x = subtotalText.getText();
-        String y = "0";
-        if (shippingFeeText.isPresent()){
-            y = shippingFeeText.getText();
-        }
-        return getIntFromPrice(x) + getIntFromPrice(y);
-    }
-
-    public boolean isGrandTotalPriceCorrect(){
-        return getSubtotalPriceWithTaxes() == getIntFromPrice(grandTotal.getText());
-    }
-
     public void clearCart(){
+        waitFor(clearCart);
         clickOn(clearCart);
+        checkCartIsEmpty();
+    }
+
+    public void checkCartIsEmpty(){
+        waitFor(emptyCart);
+        emptyCart.shouldContainOnlyText("Your cart is currently empty.");
     }
 
     public void proceedToCheckoutButton(){
         clickOn(proceedToCheckoutButton);
+        verifyCheckoutPage();
     }
 
-    public void viewCartButton(){
-        clickOn(viewCartButton);
+    public void verifyCheckoutPage(){
+        waitFor(checkoutPage);
+        checkoutPage.shouldContainOnlyText("CHECKOUT");
     }
 
-    public void updateCartButton(){
-        clickOn(updateCartButton);
+    public void clickOnViewCart(){
+        waitFor(viewCart);
+        clickOn(viewCart);
     }
 }

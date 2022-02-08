@@ -1,6 +1,5 @@
 package org.fasttrack.features.search;
 
-import org.fasttrack.steps.serenity.LoginSteps;
 import org.fasttrack.utils.EnvConstants;
 import org.junit.Test;
 
@@ -12,10 +11,10 @@ public class LoginTest extends BaseTest {
         loginSteps.enterCredentials(EnvConstants.USER_EMAIL, EnvConstants.USER_PASS);
         loginSteps.clickOnLoginButton();
         loginSteps.checkUserIsLoggedIn(EnvConstants.USER_NAME);
-
     }
+
     @Test
-    public void loginWithInValidCredentialsTest(){
+    public void loginWithInvalidCredentialsTest(){
         loginSteps.navigateToLoginPage();
         loginSteps.enterCredentials(EnvConstants.WRONG_USER_EMAIL, EnvConstants.USER_PASS);
         loginSteps.clickOnLoginButton();
@@ -23,7 +22,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void loginWithoutValidCredentialsTest(){
+    public void loginWithBlankFieldsTest(){
         loginSteps.navigateToLoginPage();
         loginSteps.clickOnLoginButton();
         loginSteps.appearLoginErrorMessage(EnvConstants.LOGIN_ERROR_MESSAGE);

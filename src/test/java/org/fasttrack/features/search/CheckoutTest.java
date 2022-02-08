@@ -12,5 +12,14 @@ public class CheckoutTest extends BaseTest {
         cartSteps.clickAddProductToCart();
     }
 
+    @Test
+    public void addToCartAndGoToCheckoutTest(){
+        loginSteps.doLogin(EnvConstants.USER_EMAIL, EnvConstants.USER_PASS);
+        searchSteps.searchAndSelectProduct(EnvConstants.PRODUCT_NAME);
+        cartSteps.clickAddProductToCart();
+        cartSteps.navigateToCart();
+        cartSteps.clickProceedToCheckoutButton();
+    }
+
 
 }

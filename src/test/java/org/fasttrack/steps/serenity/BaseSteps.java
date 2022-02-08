@@ -7,22 +7,21 @@ import org.fasttrack.utils.EnvConstants;
 
 public class BaseSteps extends ScenarioSteps {
 
-    public HomePage homePage;
+    public BasePage basePage;
     public LoginPage loginPage;
-    public MyAccountPage myAccountPage;
-    public SearchResultsPage searchResultsPage;
+    public SearchPage searchPage;
     public CartPage cartPage;
-    public ProductPage productPage;
-
-    @Step
-    public void navigateToAdminHomePage(){
-        getDriver().get(EnvConstants.ADMIN_BASE_URL);
-    }
+    public LogoutPage logoutPage;
+    public RegisterPage registerPage;
 
     @Step
     public void navigateToHomePage(){
-        getDriver().get(EnvConstants.BASE_URL);
+        basePage.open();
+    }
 
+    @Step
+    public void checkHomePage() {
+        basePage.checkHomePage();
     }
 
 }
